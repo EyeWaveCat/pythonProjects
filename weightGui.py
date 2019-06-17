@@ -27,12 +27,40 @@ class weightGui(QWidget):
         m_layout.addWidget(self.weightEdit)
         m_layout.addWidget(self.pushButton)
     
+
+    def checkDate(self,today):
+        weightFile = open(self.file,'r')
+
+        lines = weightFile.readlines()
+
+        x=[]
+        y=[]
+        for line in lines:
+            line = line.strip('\n')
+            line = line.split(" ")
+            if line != "":
+                x.append(line[0])
+                y.append(float(line[1]))
+
+        
+        if x.count(str(today)) :
+            return False
+        else:
+            return True
+
+
     def storgeWeight(self):
         weightFile = open(self.file,'a')
         today = datetime.date.today()
         text = self.weightEdit.text()
-        weightFile.write(str(today)+" "+text+"\n")
-        weightFile.flush()
+        if(self.checkDate(today)):
+            weightFile.write(str(today)+" "+text+"\n")
+            weightFile.flush()
+        else:
+            weightFile = open(self.file,'r')
+            lines = weightFile.readlines()
+            lines[-1] =  str(today)+" "+text+"\n"
+            open(self.file, 'w').writelines(lines)
         self.buildWeightCurve()
 
     def buildWeightCurve(self):
