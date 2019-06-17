@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
+from PyQt5.QtWidgets import QHBoxLayout,QWidget,QPushButton,QLineEdit,QApplication
+from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtCore import QRegExp
 import sys
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdate
